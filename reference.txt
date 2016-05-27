@@ -1,0 +1,34 @@
+
+Reference
+
+[mygraphicsscene.cpp]
+マウスで直線描画 How to draw QGraphicsLineItem during run time with mouse coordinates
+http://www.walletfox.com/course/qgraphicsitemruntimedrawing.php
+
+
+[mygraphicsview.cpp]
+２次元グラフィックスのお話 http://vivi.dyndns.org/vivi/docs/Qt/graphics.html
+
+
+[mainwindow.cpp]
+手動でメニューを作る
+http://hkpr.info/qt/sample/html/s006.php
+
+How can I add a QComboBox to the Main Toolbar in Qt Creator
+http://stackoverflow.com/questions/8122392/how-can-i-add-a-qcombobox-to-the-main-toolbar-in-qt-creator
+
+Qt Catching signal of checkbox to do an action
+http://stackoverflow.com/questions/34969533/qt-catching-signal-of-checkbox-to-do-an-action
+
+ContextMenu
+https://forum.qt.io/topic/31233/how-to-create-a-custom-context-menu-for-qtableview/3
+http://stackoverflow.com/questions/24254006/rightclick-event-in-qt-to-open-a-context-menu
+http://stackoverflow.com/questions/14237020/qtreewidget-right-click-menu
+
+QTreeWidget.
+https://www.youtube.com/watch?v=sbn1rz6LP3M
+
+レイアウトのお話
+http://vivi.dyndns.org/vivi/docs/Qt/layout.html
+
+

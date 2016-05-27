@@ -1,0 +1,196 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+.margin50 {padding-left: 50px; color: blue;}
+-->
+</style>
+</head>
+<body>
+<h2>使い方について</h2>
+<ul><li>
+<a href="#tool">ツールバー</a>
+<li><a href="#menu">メニュー</a>
+<li><a href="#tree">銘柄ツリー</a>
+<li><a href="#ind">Indicator指標</a>
+<li><a href="#setting">データ設定</a>
+<li><a href="#color">色設定</a>
+<li><a href="#context">コンテキスト（右クリックメニュー）</a>
+<li><a href="#data">データについて</a>
+<li><a href="#error">不具合について</a>
+<br>
+<li><a href="#ref">Reference</a>
+</ul>
+
+<h3><a name = "tool">ツールバー</a></h3>
+<ul>
+<li><h4>コードテキストボックス</h4></li>コードを入力して該当銘柄が存在すれば、銘柄が表示されます。
+チャートの上で数値コードを入力しても、コードテキストボックスが連動するはずです。
+
+<li><h4>足コンボボックス</h4></li>日足、週足、月足表示切り替えできます。
+
+<li><h4>月数テキストボックス</h4></li>数値を変更してリターンキーを押すことで、表示期間（月数）が変更されます。
+
+<li><h4>出来高チェックボックス</h4></li>チェックを変更することで、出来高の表示を切り替えます。
+<br>コード番号３桁の指標に関しては、出来高は表示されません。
+<br>最大出来高をwindow高さの１０％固定で（mygraphicsview.cpp const qreal VOLUME_RATIO = 0.1）表示します。
+
+<li><h4>オシレータコンボボックス</h4></li>オシレータ系（MACD,RSI等）の指標を選択します。
+Ta-Libライブラリが必要です。
+<br>最下段に表示され、window高さの２０％固定です（const qreal INDICATOR_RATIO = 0.2）。
+Mbr>MACDでは０ライン、ＲＳＩでは30%と70%のラインが表示されます。
+
+<li><h4>株価表示トグルボタン</h4></li>チャート表示部左上方に最終日付の４本足、出来高、表示されている指標の数値表示が切替できます。
+デフォルトはオン。
+<br>この数値は透明なrectangleでマウスドラッグで位置を変更することができます。
+
+<li><h4>日付スケールトグルボタン</h4></li>表示されているローソク足の日付を移動できる垂直線の表示切り替えができます。
+デフォルトはオフ。
+<br>垂直線付近で左クリックで選択できると、破線に変化してドラッグできます。
+<br>垂直線が重なるローソク足のデータ値が価格表示されます。
+</ul>
+<h3><a name = "menu">メニュー</a></h3>
+<ul>
+<li><h4>【File】--【株価ダウンロード】--【k-db最新株価ダウンロード】</h4></li>
+全銘柄の最終日以降のデータをダウンロード
+<br>初回起動時にはこれが実行され、全銘柄のコード名ファイルが作成されます。
+<br>翌日以降からのデータダウンロードはこれを実行してください。
+<br>ダウンロード更新日が開いた場合でも、まず日経平均をチェックして最終日以降で未ダウンロードの日データをすべてダウンロードするようになっています。
+<li><h4>【File】--【株価ダウンロード】--【k-db最新株価再ダウンロード】</h4></li>
+k-dbの全銘柄最新データのみダウンロード（上書き）
+<br>上のメニューは新しい日付データがなければ更新しません。
+<br>最新データダウンロードに問題があった場合に限りこちらを実行すると、上書き更新されます。
+<br>ただし、最新日以外はダウンロードしないので、最終データと最新データの間に未ダウンロード日があった場合データの空きができてしまいますので注意してください。
+<br>k-dbでデータ修正があった場合ないし、銘柄一覧データベースを更新する場合に利用します。
+<br>＊同時に銘柄データベース一覧の更新をしますので、銘柄選択ツリーが展開不能の場合これで回復すると思います。
+<li><h4>【File】--【株価ダウンロード】--【download 1year】</h4></li>表示している銘柄のみ過去１年分のデータ更新
+<be>銘柄を表示した時に、日足２０本以下の場合は１年分をダウンロードしますが、手動でダウンロードしたい場合に実行してください。
+<li><h4>【File】--【株価ダウンロード】--【表示中の銘柄の全データをダウンロード】</h4></li>表示している銘柄のみ2007年以降のデータ更新
+<li><h4>【File】--【設定】--【データ設定】</h4></li>ウィンドウ左のQDockWidgetの設定ページを表示（タブクリックと同じ）
+<li><h4>【File】--【設定】--【色設定】</h4></li>同上の色ページ表示
+<li><h4>【File】--【mChartについて】</h4></li>クレジットを表示します
+<li><h4>【File】--【終了】</h4></li>
+<li><h4>【編集】--【お気に入り】--【銘柄追加】</h4></li>表示中の銘柄を銘柄ツリーの最上位フォルダ（初期値は「登録銘柄」）に追加します。
+<li><h4>【編集】--【銘柄削除】</h4></li>ツリーで選択している銘柄をフォルダから削除します。
+<li><h4>【編集】--【フォルダ作成】</h4></li>新規フォルダを追加。ドラッグで移動可（他のフォルダに入れてしまうと再起動で表示されません）。
+<br>このフォルダに銘柄を追加したい場合は、一度先頭フォルダに銘柄を追加してからドラッグアンドドロップ。
+<li><h4>【編集】--【フォルダ削除】</h4></li>選択しているフォルダを削除（指標と市場フォルダは削除しても再起動で再表示されます）。
+</ul>
+<h3><a name = "tree">銘柄ツリー</a></h3>
+<p>全銘柄を指標と市場別に分類してツリー表示しています。
+<br>加えて、登録銘柄にお気に入りの銘柄を追加することもできます。
+トップフォルダに新規フォルダを追加することができます。フォルダ内にフォルダを追加しても保存できません。
+銘柄一覧は、k-dbから１日分の全銘柄をダウンロードすることでsqliteデータベースにbrandsテーブルとして追加されます。
+<br>登録銘柄及び追加したフォルダと銘柄はfavoriteテーブルに追加され、終了時カレントフォルダにbrandsテーブルとともにsqlite.dbファイルに保存されます。
+<br>何らかの原因でデータベースのデータが消えてしまった場合には、ツリーのフォルダに銘柄を表示できなくなってしまいます。
+<br>この場合は、【k-db最新株価ダウンロード】（新規データがなければ更新されない）または【k-db最新株価再ダウンロード】をメニューから実行することで修復されると思います。<br>ツリーはQDockWidgetに配置しているので、floating及び配置場所の移動が可能です。
+</p>
+<h3><a name = "ind">Indicator指標</a></h3>
+ツリーの下にtabウィジェットを配置しており、「main」タブでローソク足とともに表示するIndicatorを変更することができます。
+<ul>
+<li>Bollinger</li>ボリンジャーバンド20MAと1σ、2σ、3σを表示します。これを表示した場合にはMAは非表示にします。
+<li>一目</li>一目均衡表を表示します。これを表示した場合にはMAは非表示にします。
+<li>平均足</li>ローソク足ではなく平均足で表示します。
+<li>ライン</li>ローソク足ではなく終値を結ぶ折れ線で表示します。
+<li>Parabolic</li>パラボリックを重ねて表示します。
+<li>MA</li>チェックボックスでオンオフできます。数値を変更してEnterキーを押すことで移動平均期間が変更されます。
+</ul>
+<h3><a name = "data">データ設定</a></h3>
+データディレクトリとindex.txtの変更指定ができます。
+index.txtとは、OmegaChartというWindowsの高機能チャートプログラム(C# apache licence)で銘柄一覧を収納したテキストファイルで、各銘柄の分割情報が保存されています。
+<br>OmegaChartのサポートは終了していますが、有志により保守作業が継続されておりindex.txtも更新されています。
+https://osdn.jp/users/panacoran/pf/OmegaChart/wiki/FrontPage
+<br>index.txtは残念ながらブラウザからはアクセスできず、OmegaChartのプログラム経由でなければダウンロードできない仕様になっています。
+<br>curlを利用してダウンロードする機能をつけることもできますが、更新者の了承が必要と思われますのでこのバージョンでは爺そうしていません。
+OmegaChartを利用しているのであれば、このファイルを「IndexText」のボタンで表示されるファイルダイアログで選択することで、分割修正した株価でローソク足が表示されるようになります。
+<h3><a name = "color">色設定</a></h3>
+色のついたテキストボックスを選択してEnterキーを押すことでカラーダイアログが表示され色を選択し変更することができます。
+<br>背景色だけは、再起動するまでは変更が反映されません。
+MyGraphicsViewでsceneを銘柄変更ごとにクリアすれば即時反映可能ですが、銘柄を次々に表示しているうちに描画できなくなることがありました。明確な原因は不明ですが、背景のbaseRectangleはクリアせずにこれに描画をaddChildしてみたところ不具合が
+少なくなったため、背景の即時反映は諦めました。
+<br>他の描画は即時反映されるはずです。
+
+
+<h3><a name = "context">コンテキスト（右クリックメニュー）</a></h3>
+ツリーでは,編集メニュー同様銘柄あるいはフォルダの追加と削除。
+チャートキャンバスでは、「銘柄追加」「ライン描画」「ライン消去」が表示されます。
+銘柄編集は編集メニューと同様。
+<br>「ライン描画」とは、キャンバスに支持線などの自由曲線を描くためのメニューです。メニューをクリックしたのちに任意の位置からマウスをドラッグしてリリースすると、直線が描かれます。
+メニューをクリックするごとに複数の直線が描くことが可能です。「ライン消去」のメニューで1本づつ描画した自由直線を消去します。
+ラインを残したまま足の変更、期間の変更、銘柄を変更などをするとラインは全て消去され、保持されません。
+
+<h3><a name = "data">株価データについて</a></h3>
+株価データはhttp://k-db.comからダウンロードして指定したローカルフォルダに銘柄コードごとのファイルに保存されます。
+データ構造はWindowsのOmegaChartというフリーソフト(apache licence)のデータに準拠しています。
+オリジナルのOmegaChartのデータは、１日のデータが以下に示すような連続した32ビット（4byte）整数x８列（計32byte）から成るデータが、
+日付の昇順に連続して保存されたバイナリデータです。
+①8桁整数日付②始値③高値④安値⑤終値⑥出来高⑦信用売残⑧信用買残
+mChartでは、このプログラムでは信用残２列を覗いた①−⑥の６列（24バイト）を１日データとしています。
+originalのOmegaChart用の３２バイトデータも指定することで利用可能にしています。
+個別銘柄の株価は一部0.1円刻みになっているため、実株価の10倍で保存しています。
+また、株価指数は大部分が0.01刻みのため、100倍で保存しています。
+出来高は2,147,483,647以上は対応できません（ごく稀にオーバする場合があります。この場合チャートでは0になります。）。
+＊mChart形式では1/100で出来高を保存していますので、100倍までオーバーフローしません。
+また、指数の場合は出来高は表示されません。
+<br><br>
+データダウンロードは別スレッドで行われ、終了するとステータスバーにメッセージが表示されるはずです。
+<br>ダウンロード中に別の銘柄を表示することも可能ですが、ひょっとすると書き込み中にデータにアクセスした場合の挙動はよくわかりません。
+<h3><a name = "error">不具合について</a></h3>
+既知の不具合として、<ol>
+<li>銘柄変更を繰り返しているうちにチャート描画されなくなってしまうことがある。</li>
+<li>長期間のMA（例えば200日）のラインが途切れたり、垂直に近い値をとってしますことがある。</li>
+数値がマイナスになることもあるが、銘柄変更等の後で再描画した場合は正常に戻ることが多い。
+<br>Ta-Libの計算結果をsqliteのテーブルにコピーしてからチャート描画でselectしているので、この辺りに問題があるのかもしれない。
+<li>windowsでTa-Libがincludeできない</li>
+Ubuntu14.04のVirtualBoxのWindows10に64ビットQt Creator５．6をインストールして試してみたが、includeできずに関数が見つからないとエラーになってしまう。
+誰か解決策わかれば教えていただきたいです。
+</ol>
+あくまで評価版で、重大なエラーやデータ取得変換のエラー等が存在する可能性も十分考えられます。
+くれぐれもこれを理解した上で評価していただきたく存じます。
+<p align="right">2016年5月</p>
+<br><br><br>
+<p><a name = "ref">Reference</a></p>
+<ul>
+<li>MainWindows.cpp</li>
+<ol>
+<li>手動でメニューを作る</li>http://hkpr.info/qt/sample/html/s006.php
+<li>レイアウトのお話</li>http://vivi.dyndns.org/vivi/docs/Qt/layout.html
+<li>How can I add a QComboBox to the Main Toolbar in Qt Creator</li>http://stackoverflow.com/questions/8122392/how-can-i-add-a-qcombobox-to-the-main-toolbar-in-qt-creator
+<li>Qt Catching signal of checkbox to do an action</li>http://stackoverflow.com/questions/34969533/qt-catching-signal-of-checkbox-to-do-an-action
+<li>https://wiki.qt.io/How_to_Change_the_Background_Color_of_QWidget/ja</li>
+<li>リソースファイルの追加と読み込み</li>http://qt.misfrog.com/
+<li>QTreeWidget.</li>https://www.youtube.com/watch?v=sbn1rz6LP3M
+<li>ContextMenu</li>
+http://www.codeprogress.com/cpp/libraries/qt/showQtExample.php?index=541&key=QActionContextMenuEvent
+https://forum.qt.io/topic/31233/how-to-create-a-custom-context-menu-for-qtableview/3
+http://stackoverflow.com/questions/24254006/rightclick-event-in-qt-to-open-a-context-menu
+http://stackoverflow.com/questions/14237020/qtreewidget-right-click-menu
+</ol>
+<li>MyGraphicsView.cpp</li>
+<ol><li>２次元グラフィックスのお話</li>http://vivi.dyndns.org/vivi/docs/Qt/graphics.html
+</ol>
+<li>MyGraphicsScene.cpp</li>
+<ol>
+<li>マウスで直線描画 How to draw QGraphicsLineItem during run time with mouse coordinates</li>http://www.walletfox.com/course/qgraphicsitemruntimedrawing.php
+</ol>
+<li>BackgroundThread.cpp</li>
+<ol>
+<li>Qtのsignal/slotとthread(1)</li>http://qiita.com/false-git@github/items/ead2b8793280661662db
+</ol>
+<li>その他</li>
+<ol><li>QStringの文字化け対策</li>http://qt-log.open-memo.net/sub/trouble__garble_QString.html
+<li>正規表現の最短マッチ</li>http://qwertyfk.blog16.fc2.com/blog-entry-84.html
+<li>C++erがQtを使うべき１０の理由</li>http://kudannlab.blogspot.jp/2013/12/cerqt.html
+c++11、qsqliteなど
+<li>.pro file</li>http://hiroyky.blogspot.jp/2014/04/qtproos.html
+http://elisp.net/qt-doc-ja_JP/qmake-tutorial.html
+</ol>
+<li></li>
+<ol><li>Ta-Lib</li>http://ta-lib.org/d_api/d_api.html
+https://mrjbq7.github.io/ta-lib/install.html
+<li>OmegaChart</li>https://osdn.jp/users/panacoran/pf/OmegaChart/wiki/FrontPage
+2ch OmegaChartスレ
+</ol>
+</ul>
+</body>
+</html>
