@@ -10,10 +10,15 @@ you can display Moving Average, Bollinger Band, Parabolic,MACD,RSI,Momentum and 
 OsX(El Capitan)とUbuntu14.04環境下でデバッグしています。  
 テストαバージョンで、重大なバグが隠れている可能性があります。  
 日本株限定で、株価データをk-db.comから取得してチャート表示をします。  
+
+## Demo
+https://github.com/narih/qtKabuChart/wiki/images/chart.png
+
 ## Requirement
 - Qt5  
 - Ta-Lib(http://ta-lib.org/) open-source for c/c++  
-Ta-Libがない場合でもエラーは出ないはずですが、大部分のテクニカル指標が表示できません。
+Ta-Libがない場合でもエラーは出ないはずですが、大部分のテクニカル指標が表示できません。  
+
 ## Usage
 
 
