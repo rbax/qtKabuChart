@@ -12,7 +12,7 @@ OsX(El Capitan)とUbuntu14.04環境下でデバッグしています。
 日本株限定で、株価データをk-db.comから取得してチャート表示をします。  
 
 ## Demo
-https://github.com/narih/qtKabuChart/wiki/images/chart.png
+![](https://github.com/narih/qtKabuChart/wiki/images/chart.png)
 
 ## Requirement
 - Qt5  
