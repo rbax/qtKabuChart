@@ -23,4 +23,4 @@ Ta-Libがない場合でもエラーは出ないはずですが、大部分の�
 
 
 ## License
-Distributed under the [MIT License][mit].
+MIT see LICENCE
