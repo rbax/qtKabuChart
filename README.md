@@ -18,7 +18,7 @@ This program is for japanese stocks only.
 データ取得元k-db.comのアクセス制限によりデータ取得ができない場合があります。
 
 ## Demo
-![](https://github.com/narih/qtKabuChart/wiki/images/ceres.png)  
+![](https://github.com/narih/qtKabuChart/wiki/images/sosei.png)  
 
 ## Requirement
 - [Open source Qt5.x](https://www.qt.io/download-open-source/  "ダウンロードページ") 
