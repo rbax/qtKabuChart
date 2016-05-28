@@ -311,6 +311,10 @@ void MyGraphicsView::updateChart(){
         interval = 0.5 * pow(10.0, e);
     else
         interval = 1 * pow(10.0, e);
+    //interval = 0 でnanになるのがチャート表示できなくなる原因か？
+    if(interval == 0)
+        interval = 1;
+
     priceScaleTop = ceil(maxPrice / interval) * interval;       //max of price area
     priceScaleBottom = floor(minPrice / interval) * interval;   //min
     //qreal r = 100.0 / (priceScaleTop - priceScaleBottom);
