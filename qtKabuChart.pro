@@ -34,8 +34,8 @@ macx {
         message("ex ta-lib")
         SOURCES += fortalib.cpp
         HEADERS  += fortalib.h
-        #LIBS += -L/usr/local/lib -lta_lib ##一般的にはこちら
-        LIBS += -L/usr/local/Cellar/ta-lib/0.4.0/lib -lta_lib ##QtCreatorをアップデートして自分の環境ではこちらでなければ動かなくなってしまいました
+        LIBS += -L/usr/local/lib -lta_lib ##一般的にはこちら
+        #LIBS += -L/usr/local/Cellar/ta-lib/0.4.0/lib -lta_lib ##QtCreatorをアップデートして自分の環境ではこちらでなければ動かなくなってしまいました
         INCLUDEPATH += /usr/local/include/ta-lib
     }
 }
@@ -65,7 +65,7 @@ message("win")
 }
 
 
-#QMAKE_CXXFLAGS += -std=c++11
+#QMAKE_CXXFLAGS += -std=c++11 ##これは必要なさそう
 CONFIG += c++11
 
 
